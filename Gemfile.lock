@@ -1,0 +1,12 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    CoffeeTags (0.0.2.6)
+    erubis (2.7.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  CoffeeTags
+  erubis
