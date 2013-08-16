@@ -3,6 +3,7 @@ GEM
   specs:
     CoffeeTags (0.0.2.6)
     erubis (2.7.0)
+    rake (10.0.4)
 
 PLATFORMS
   ruby
@@ -10,3 +11,4 @@ PLATFORMS
 DEPENDENCIES
   CoffeeTags
   erubis
+  rake

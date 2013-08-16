@@ -1,0 +1,47 @@
+snippet hel
+	#= require spec_helper
+snippet des
+	describe '${1}', ->
+	  ${2}
+snippet con
+	context '${1}', ->
+	  ${2}
+snippet itp
+	it '${1}'
+snippet it
+	it '${1}', ->
+	  ${2}
+snippet bef
+	before ->
+	  ${1}
+snippet aft
+	after ->
+	  ${1}
+snippet befe
+	beforeEach ->
+	  ${1}
+snippet afte
+	afterEach ->
+	  ${1}
+snippet spy
+	sinon.spy()
+snippet sb
+	should.be.${1}
+snippet sbd
+	should.be.defined
+snippet sba
+	should.be.a '${1}'
+snippet sbaf
+	should.be.a 'function'
+snippet sbe
+	should.be.eq ${1}
+snippet sbel
+	should.be.eql ${1}
+snippet sbc
+	should.be.called
+snippet snbc
+	should.not.be.called
+snippet sbco
+	should.be.calledOnce
+snippet sbcw
+	should.be.calledWith

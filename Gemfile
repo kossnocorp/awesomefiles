@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
+gem 'rake'
 gem 'erubis'
-
-# vim
 gem 'CoffeeTags'

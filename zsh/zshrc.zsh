@@ -1,69 +1,87 @@
-# Oh My Zsh path
-export ZSH=$HOME/.oh-my-zsh
+#                      .x+=:.
+#                     z`    ^%    .uef^"
+#             ..         .   <k :d88E          .u    .
+#           .@88i      .@8Ned8" `888E        .d88B :@8c        .
+#          ""%888>   .@^%8888"   888E .z8k  ="8888f8888r  .udR88N
+#            '88%   x88:  `)8b.  888E~?888L   4888>'88"  <888'888k
+#          ..dILr~` 8888N=*8888  888E  888E   4888> '    9888 'Y"
+#         '".-%88b   %8"    R88  888E  888E   4888>      9888
+#    .     @  '888k   @8Wou 9%   888E  888E  .d888L .+   9888
+#  .@8c   8F   8888 .888888P`    888E  888E  ^"8888*"    ?8888u../
+# '%888" '8    8888 `   ^"F     m888N= 888>     "Y"       "8888P'
+#   ^*   '8    888F              `Y"   888                  "P'
+#         %k  <88F                    J88"
+#          "+:*%`                     @%
+#                                   :"
 
-# Plugins
-plugins=(git)
+SetLocaleToUTF8 () {
+  export LC_ALL=en_US.UTF-8
+  export LANG=en_US.UTF-8
+}
 
-# Theme
-export ZSH_THEME="oz"
+SetupOhMyZsh () {
+  export DISABLE_CORRECTION=true
+  export ZSH=$HOME/.oh-my-zsh
+  plugins=(autojump)
+  source $ZSH/oh-my-zsh.sh
+}
 
-# Start Oh My Zsh
-source $ZSH/oh-my-zsh.sh
+ExportPaths () {
+  paths=(
+    /Applications/Postgres.app/Contents/MacOS/bin
+    $HOME/Dropbox/Applications/Postgres.app/Contents/MacOS/bin
+    /usr/local/bin
+    /usr/bin
+    /bin
+    /usr/sbin
+    /sbin
+    /usr/X11/bin
+    /usr/local/sbin
+    /usr/local/share/python
+    /usr/local/share/npm/bin
+    $HOME/Code/bin
+    $HOME/Library/Python/2.7/bin/
+  )
 
-if [ -f `brew --prefix`/etc/autojump ]; then
-  . `brew --prefix`/etc/autojump
-fi
+  export PATH=$(IFS=: ; echo "${paths[*]}")
+}
 
-# Homebrew
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/sbin
+SetupPowerline () {
+  . ~/.powerline/powerline/bindings/zsh/powerline.zsh
+}
 
-# npm
-export PATH=/usr/local/share/npm/bin:$PATH
+SetupZshCorrect () {
+  if [ -f ~/.zsh_nocorrect ]; then
+      while read -r COMMAND; do
+          alias $COMMAND="nocorrect $COMMAND"
+      done < ~/.zsh_nocorrect
+  fi
+}
 
-# rbenv
-#export PATH=$HOME/.rbenv/shims:$PATH
-#export PATH=$HOME/.rbenv/bin:$PATH
+LoadAliases () {
+  . ~/.config/zsh/aliases.zsh
+}
 
-# PostgreSQL
-export PATH=$HOME/Dropbox/Applications/Postgres.app/Contents/MacOS/bin:$PATH
-export PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
-export PATH=~/Code/bin:$PATH
-export PATH=/usr/local/share/python:$PATH
+SetupVim () {
+  # Set as default editor
+  export EDITOR='vim'
+  # Keep vim up-to-date
+  export FRESH_VIM='mvim -v'
+  # Allow to use <c-s>
+  alias vim="stty stop '' -ixoff ; $FRESH_VIM"
+}
+
+SetupRbenv () {
+  if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+}
 
 export TERM='xterm-256color'
 
-alias c='pygmentize -O style=solarized -f console256 -g'
-
-alias z='zeus'
-alias zr='zeus rake'
-alias zrdm='zeus rake db:migrate'
-alias zc='zeus console'
-
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-
-if [ -f ~/.zsh_nocorrect ]; then
-    while read -r COMMAND; do
-        alias $COMMAND="nocorrect $COMMAND"
-    done < ~/.zsh_nocorrect
-fi
-
-export EDITOR='vim'
-
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
-
-eval "$(/Users/koss/Code/topsub/bin/topsub init -)"
-
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
-alias t='topsub'
-alias to='t open'
-alias tp='t push'
-alias tl='t pull'
-alias tlp='tl && tp'
-alias tpr='t pr'
-alias tf='t fork'
-alias tu='t upstream'
-
-alias vim="stty stop '' -ixoff ; vim"
-
+SetLocaleToUTF8
+SetupOhMyZsh
+ExportPaths
+SetupZshCorrect
+SetupPowerline
+LoadAliases
+SetupVim
+SetupRbenv
