@@ -8,7 +8,7 @@ module GitHub
   def self.clone_or_update(git, dir)
     if File.exists?(dir)
       last_dir = Dir.pwd
-      Dir.chdir dir 
+      Dir.chdir dir
       system "git pull origin master"
       Dir.chdir last_dir
     else
@@ -41,7 +41,9 @@ Dir.foreach('.') do |file_name|
        Dir.chdir update_dir
 
        module_name = file_name.gsub!(/^[a-z]|_+[a-z]/) { |a| a.upcase }.gsub('_', '')
-       eval "#{module_name}.update!"
+       updater = eval(module_name).new
+       updater.perform
+       #updater.after rescue
      end
    end
 

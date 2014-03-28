@@ -20,6 +20,7 @@ SetLocaleToUTF8 () {
 }
 
 SetupOhMyZsh () {
+  export ZSH_THEME=theunraveler
   export DISABLE_CORRECTION=true
   export ZSH=$HOME/.oh-my-zsh
   plugins=(autojump)
@@ -40,6 +41,7 @@ ExportPaths () {
     /usr/local/share/python
     /usr/local/share/npm/bin
     $HOME/Code/bin
+    $HOME/.bin
     $HOME/Library/Python/2.7/bin/
   )
 
@@ -66,9 +68,10 @@ SetupVim () {
   # Set as default editor
   export EDITOR='vim'
   # Keep vim up-to-date
-  export FRESH_VIM='mvim -v'
+  export VIM='mvim -v'
+  #export VIM='vim'
   # Allow to use <c-s>
-  alias vim="stty stop '' -ixoff ; $FRESH_VIM"
+  alias vim="stty stop '' -ixoff ; $VIM"
 }
 
 SetupRbenv () {
@@ -81,7 +84,24 @@ SetLocaleToUTF8
 SetupOhMyZsh
 ExportPaths
 SetupZshCorrect
-SetupPowerline
+#SetupPowerline
 LoadAliases
 SetupVim
 SetupRbenv
+
+export SSL_CERT_FILE=/usr/local/etc/cacert.pem
+
+source "$HOME/.antigen/antigen.zsh"
+
+#antigen-bundle arialdomartini/oh-my-git
+#antigen theme arialdomartini/oh-my-git-themes arialdo-granzestyle
+
+#antigen-apply
+
+#antigen-use oh-my-zsh
+#antigen-bundle git
+#antigen-bundle zsh-users/zsh-syntax-highlighting
+#antigen-bundle zsh-users/zsh-history-substring-search
+
+#antigen-bundle arialdomartini/oh-my-git
+#antigen theme arialdomartini/oh-my-git-themes arialdo-granzestyle
