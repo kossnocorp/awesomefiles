@@ -2,13 +2,13 @@ GEM
   remote: https://rubygems.org/
   specs:
     CoffeeTags (0.0.2.6)
+    colorize (0.7.3)
     erubis (2.7.0)
-    rake (10.0.4)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   CoffeeTags
+  colorize
   erubis
-  rake

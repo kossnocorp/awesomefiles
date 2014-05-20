@@ -1,42 +1,62 @@
-#require 'digest/sha1'
-
-#BUNDLE_DIR = File.join(TMP_DIR, 'vim', 'bundle')
-#FileUtils.mkdir_p(BUNDLE_DIR) unless File.exists?(BUNDLE_DIR)
-
 class Vim
-  def perform
-    #install_vimrc
-    #create_vim_dir
 
-    install_snippets
+  def setup
+    symlink_vimrc
+    symlink_vim_dir
+    symlink_bundle_dir
+    symlink_config
+    symlink_snippets
   end
 
-  def install_vimrc
-    vimrc = File.expand_path('~/.vimrc')
-
-    File.delete(vimrc) if File.symlink?(vimrc)
-    File.symlink(File.expand_path('vimrc.vim'), vimrc)
+  def symlink_vimrc
+    symlink('vimrc.vim', '~/.vimrc')
   end
 
-  def create_vim_dir
-    Dir.create
+  def symlink_vim_dir
+    symlink(base_dir_path, '~/.vim')
   end
 
-  def install_snippets
-    target_dir = File.expand_path('~/.vim/snippets')
-    File.delete(target_dir) if File.symlink?(target_dir)
+  def symlink_bundle_dir
+    symlink(tmp_dir_expand('bundle'), base_dir_expand('bundle'))
+  end
 
-    File.symlink(File.expand_path('snippets'), target_dir)
+  def symlink_config
+    symlink_to_base('config')
+  end
+
+  def symlink_snippets
+    symlink_to_base('snippets')
   end
 
   def after
   end
 
-private
+  private
 
-  def base_dir
-    vim_base = File.join(TMP_DIR, 'vim', 'base')
-    FileUtils.rm_rf(vim_base) if File.exists?(vim_base)
-    Dir.mkdir(vim_base)
+  def symlink_to_base(path)
+    symlink(path, base_dir_expand(path))
+  end
+
+  def symlink(source, target)
+    source_path = File.expand_path(source)
+    target_path = File.expand_path(target)
+    File.delete(target_path) if File.symlink?(target_path)
+    File.symlink(source_path, target_path)
+  end
+
+  def base_dir_expand(path)
+    File.join(base_dir_path, path)
+  end
+
+  def base_dir_path
+    tmp_dir_expand('base')
+  end
+
+  def tmp_dir_expand(path)
+    File.join(tmp_dir_path, path)
+  end
+
+  def tmp_dir_path
+    File.join(TMP_DIR, 'vim')
   end
 end

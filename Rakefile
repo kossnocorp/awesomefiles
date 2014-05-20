@@ -3,23 +3,7 @@ require 'bundler/setup'
 require 'fileutils'
 require 'yaml'
 require 'erubis'
-
-module GitHub
-  def self.clone_or_update(git, dir)
-    if File.exists?(dir)
-      last_dir = Dir.pwd
-      Dir.chdir dir
-      system "git pull origin master"
-      Dir.chdir last_dir
-    else
-      system "git clone #{git} #{dir}"
-    end
-  end
-
-  def self.name(git)
-    git.match(/\/([^\/]+)\.git$/).captures.first
-  end
-end
+require 'colorize'
 
 scripts = []
 
@@ -38,12 +22,15 @@ Dir.foreach('.') do |file_name|
      task file_name do
        require update_script
 
-       Dir.chdir update_dir
+       Dir.chdir(update_dir)
 
        module_name = file_name.gsub!(/^[a-z]|_+[a-z]/) { |a| a.upcase }.gsub('_', '')
+
+       puts "Running #{module_name}.setup...".green
        updater = eval(module_name).new
-       updater.perform
+       updater.setup
        #updater.after rescue
+       puts 'Done'.green
      end
    end
 
