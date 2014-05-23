@@ -1,21 +1,7 @@
-" Y88b Y88                   ,e,                    d8   ,e,
-"  Y88b Y8  ,"Y88b Y8b Y888P  "   e88 888  ,"Y88b  d88    "   e88 88e  888 8e
-" b Y88b Y "8" 888  Y8b Y8P  888 d888 888 "8" 888 d88888 888 d888 888b 888 88b
-" 8b Y88b  ,ee 888   Y8b "   888 Y888 888 ,ee 888  888   888 Y888 888P 888 888
-" 88b Y88b "88 888    Y8P    888  "88 888 "88 888  888   888  "88 88"  888 888
-"                                  ,  88P
-"                                 "8",P"
+
 
 """ Splits
 
-" For 'Seamlessly Navigate Vim and tmux Splits'
-" http://robots.thoughtbot.com/post/53022241323/seamlessly-navigate-vim-and-tmux-splits
-NeoBundle 'christoomey/vim-tmux-navigator'
-
-nmap <c-h> <c-w>h
-nmap <c-j> <c-w>j
-nmap <c-k> <c-w>k
-nmap <c-l> <c-w>l
 
 " > land to window you choose like tmux's 'display-pane'
 NeoBundle 't9md/vim-choosewin'
@@ -79,7 +65,7 @@ map <leader>opm :CtrlPModified<cr>
 NeoBundle 'Lokaltog/vim-easymotion'
 
 " Integrate n/N navigation with EasyMotion
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
+"map  / <Plug>(easymotion-sn)
+"omap / <Plug>(easymotion-tn)
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)

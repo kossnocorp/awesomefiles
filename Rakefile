@@ -1,44 +1,55 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'fileutils'
-require 'yaml'
-require 'erubis'
 require 'colorize'
+
+class Setup
+
+  def initialize
+    ensure_tmp_dir
+  end
+
+  private
+
+  def ensure_tmp_dir
+    Dir.mkdir('tmp') unless File.exists?('tmp')
+  end
+end
+
+setup = Setup.new
 
 scripts = []
 
-BASE_DIR = File.expand_path('.')
-TMP_DIR  = File.expand_path('tmp')
-CONFIG   = YAML.load_file('config.yml')
+TMP_DIR = File.expand_path('tmp')
+FILES_DIR = File.expand_path('files')
 
-Dir.foreach('.') do |file_name|
- if File.directory?(file_name) and not file_name =~ /^\./
-   scripts << file_name
+Dir.foreach('files') do |file_name|
+  setup_dir = File.join(FILES_DIR, file_name)
 
-   update_dir    = File.join(BASE_DIR, file_name)
-   update_script = File.join(update_dir, 'update.rb')
+  if File.directory?(setup_dir) and not file_name =~ /^\./
+    scripts << file_name
 
-   if File.exist?(update_script)
-     task file_name do
-       require update_script
+    setup_script = File.join(setup_dir, 'setup.rb')
 
-       Dir.chdir(update_dir)
+    if File.exist?(setup_script)
+      task file_name do
+        require setup_script
 
-       module_name = file_name.gsub!(/^[a-z]|_+[a-z]/) { |a| a.upcase }.gsub('_', '')
+        Dir.chdir(setup_dir)
 
-       puts "Running #{module_name}.setup...".green
-       updater = eval(module_name).new
-       updater.setup
-       #updater.after rescue
-       puts 'Done'.green
-     end
-   end
+        module_name = file_name.gsub!(/^[a-z]|_+[a-z]/) { |a| a.upcase }.gsub('_', '')
 
- end
+        puts "Running setup script for #{file_name}...".green
+        updater = eval(module_name).new(tmp_dir: TMP_DIR)
+        updater.setup
+        #updater.after rescue
+        puts '... done'.green
+      end
+    else
+      puts "Setup script for #{file_name} is not found".yellow
+    end
+  end
 end
 
-# Create tmp dir
-Dir.mkdir('tmp') unless File.exists?('tmp')
-
 # `rake update` will update all
-task :update => scripts do; end
+task default: scripts do; end

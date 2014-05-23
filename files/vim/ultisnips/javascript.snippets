@@ -1,0 +1,36 @@
+# JavaScript
+
+snippet v "var ..."
+var $1 = $0;
+endsnippet
+
+snippet fun "Multiline function"
+function ${1}(${2}) {
+  $3
+}
+endsnippet
+
+snippet fus "Singleline function"
+function (${1}) { $2 }
+endsnippet
+
+# AMD
+
+snippet rq "require(...)"
+require('$0')
+endsnippet
+
+snippet me "module.exports = ..."
+module.exports = $0;
+endsnippet
+
+# React.js
+
+snippet rc "React.createClass(...)"
+React.createClass({
+
+  render: function () {
+    return $0
+  }
+})
+endsnippet

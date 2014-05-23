@@ -1,7 +1,4 @@
-" base.vim
 " Basic cofiguration.
-
-" Initialization
 
 " Set shell to sh
 if &shell =~# 'fish$'
@@ -9,7 +6,6 @@ if &shell =~# 'fish$'
 endif
 
 " NeoBundle setup
-
 if has('vim_starting')
   set nocompatible
   set runtimepath+=~/.vim/bundle/neobundle.vim/
@@ -18,7 +14,6 @@ endif
 call neobundle#rc(expand('~/.vim/bundle/'))
 
 NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc'
 
 NeoBundle 'gist:kossnocorp/7211844', {
         \ 'name': 'mlessnau_block_shift.vim',
@@ -35,9 +30,9 @@ NeoBundle 'vim-scripts/DeleteTrailingWhitespace'
 NeoBundle 'airblade/vim-rooter'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'tpope/vim-surround'
-NeoBundle 'garbas/vim-snipmate'
-NeoBundle 'tomtom/tlib_vim'
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
+"NeoBundle 'garbas/vim-snipmate'
+"NeoBundle 'tomtom/tlib_vim'
+"NeoBundle 'MarcWeber/vim-addon-mw-utils'
 
 NeoBundle 'heartsentwined/vim-ember-script'
 NeoBundle 'heartsentwined/vim-emblem'
@@ -71,7 +66,7 @@ NeoBundle 'tpope/vim-git'
 NeoBundle 'troydm/zoomwintab.vim'
 "Bundle 'scrooloose/syntastic'
 "Bundle 'fweep/vim-tabber'
-NeoBundle 'ervandew/supertab'
+"NeoBundle 'ervandew/supertab'
 NeoBundle 'matze/vim-move'
 
 NeoBundle 'kshenoy/vim-signature'
@@ -87,11 +82,19 @@ NeoBundle 'rizzatti/dash.vim'
 
 NeoBundle 'vim-scripts/Align'
 
+source ~/.vim/config/general.vim
 source ~/.vim/config/look.vim
 source ~/.vim/config/status.vim
 source ~/.vim/config/syntax.vim
+
 source ~/.vim/config/navigation.vim
-source ~/.vim/config/edit.vim
+source ~/.vim/config/navigation/editor.vim
+source ~/.vim/config/navigation/file.vim
+source ~/.vim/config/navigation/text.vim
+
+source ~/.vim/config/edit/autocomplete.vim
+source ~/.vim/config/edit/snippets.vim
+source ~/.vim/config/edit/multiple_cursors.vim
 
 " 888 888 ,e,          888     888 ,e,            d8   888         d8                                 888
 " 888 888  "   e88 888 888 ee  888  "   e88 888  d88   888 ee     d88   Y8b Y8b Y888P  ,e e,   ,"Y88b 888 ee  dP"Y
@@ -109,14 +112,6 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
-
-
-" 888 88b,               ,e,
-" 888 88P'  ,"Y88b  dP"Y  "   e88'888  dP"Y
-" 888 8K   "8" 888 C88b  888 d888  '8 C88b
-" 888 88b, ,ee 888  Y88D 888 Y888   ,  Y88D
-" 888 88P' "88 888 d,dP  888  "88,e8' d,dP
-
 
 set encoding=utf-8
 
@@ -250,13 +245,6 @@ let g:EasyMotion_leader_key = '<leader>'
 
 " TODO: Open CtrlP in file mode
 
-set wildignore+=*/.idea/*
-set wildignore+=*/public/assets/*
-set wildignore+=*/tmp/*
-set wildignore+=*/log/*
-set wildignore+=*/node_modules/*
-set wildignore+=*/bower_compo
-
 " vim-signify
 " https://github.com/mhinz/vim-signify
 
@@ -318,34 +306,6 @@ autocmd BufWrite *.sass silent! :%s/;$//g
 au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
   \| exe "normal! g`\"" | endif
 
-
-" 888 88P
-" 888 8P   ,e e,  Y8b Y888P
-" 888 K   d88 88b  Y8b Y8P
-" 888 8b  888   ,   Y8b Y
-" 888 88b  "YeeP"    888
-"                    888
-"                    888
-" 888      ,e,              888 ,e,
-" 888 88e   "  888 8e   e88 888  "  888 8e   e88 888  dP"Y
-" 888 888b 888 888 88b d888 888 888 888 88b d888 888 C88b
-" 888 888P 888 888 888 Y888 888 888 888 888 Y888 888  Y88D
-" 888 88"  888 888 888  "88 888 888 888 888  "88 888 d,dP
-"                                             ,  88P
-"                                            "8",P"
-
-" Navigation
-
-" Disable arrow key for navigation
-map  <up> <nop>
-map  <down> <nop>
-map  <left> <nop>
-map  <right> <nop>
-imap <up> <nop>
-imap <down> <nop>
-imap <left> <nop>
-imap <right> <nop>
-
 " NERDTree binding
 map <leader>ono :NERDTree<CR>
 map <leader>onc :NERDTreeClose<CR>
@@ -390,7 +350,6 @@ nnoremap <c-u> viwU<esc>
 
 " Command line
 
-cnoremap <C-a> <Home>
 "
 
 

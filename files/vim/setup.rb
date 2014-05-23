@@ -1,5 +1,9 @@
 class Vim
 
+  def initialize(options = {})
+    @tmp_dir = options[:tmp_dir]
+  end
+
   def setup
     symlink_vimrc
     symlink_vim_dir
@@ -25,7 +29,7 @@ class Vim
   end
 
   def symlink_snippets
-    symlink_to_base('snippets')
+    symlink_to_base('ultisnips')
   end
 
   def after
@@ -57,6 +61,6 @@ class Vim
   end
 
   def tmp_dir_path
-    File.join(TMP_DIR, 'vim')
+    File.join(@tmp_dir, 'vim')
   end
 end
