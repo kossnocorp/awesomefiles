@@ -10,48 +10,24 @@ if has('vim_starting')
   set nocompatible
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
-
 call neobundle#rc(expand('~/.vim/bundle/'))
-
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-NeoBundle 'gist:kossnocorp/7211844', {
-        \ 'name': 'mlessnau_block_shift.vim',
-        \ 'script_type': 'plugin'}
+source ~/.vim/config/syntax.vim
 
-" Visual mode
+syntax enable
+filetype plugin indent on
 
-" Move selected blocks by <C-k/j>
-vmap <C-k> :call BlockShiftUp()<CR>
-vmap <C-j> :call BlockShiftDown()<CR>
-
-NeoBundle 'vim-scripts/ShowTrailingWhitespace'
-NeoBundle 'vim-scripts/DeleteTrailingWhitespace'
 NeoBundle 'airblade/vim-rooter'
-NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'tpope/vim-surround'
-"NeoBundle 'garbas/vim-snipmate'
-"NeoBundle 'tomtom/tlib_vim'
-"NeoBundle 'MarcWeber/vim-addon-mw-utils'
 
 NeoBundle 'heartsentwined/vim-ember-script'
 NeoBundle 'heartsentwined/vim-emblem'
 NeoBundle 'jimenezrick/vimerl'
 
 NeoBundle 'scrooloose/nerdtree'
-" Replace this origin after merge: https://github.com/mileszs/ack.vim/pull/86
-" Bundle 'mileszs/ack.vim'
-NeoBundle 'abeaumet/ack.vim'
-NeoBundle 'dyng/ctrlsf.vim'
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'Townk/vim-autoclose'
-NeoBundle 'sickill/vim-pasta'
 
-NeoBundle 'kana/vim-fakeclip'
-NeoBundle 'gorkunov/smartpairs.vim'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'majutsushi/tagbar'
-NeoBundle 'godlygeek/tabular'
 "Bundle 'stephenmckinney/vim-solarized-powerline'
 
 NeoBundle 'hwrod/interactive-replace'
@@ -64,37 +40,26 @@ NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-git'
 NeoBundle 'troydm/zoomwintab.vim'
-"Bundle 'scrooloose/syntastic'
-"Bundle 'fweep/vim-tabber'
-"NeoBundle 'ervandew/supertab'
-NeoBundle 'matze/vim-move'
 
-NeoBundle 'kshenoy/vim-signature'
-
-
-" > alternate between relative numbering (normal mode) and absolute numbering
-" > (insert mode) depending on the mode you are in
-NeoBundle 'myusuf3/numbers.vim'
-"
-" Dash.app support
-NeoBundle 'rizzatti/funcoo.vim'
-NeoBundle 'rizzatti/dash.vim'
-
-NeoBundle 'vim-scripts/Align'
+echo split(globpath('~/.vim/config', '**'), '\n')
 
 source ~/.vim/config/general.vim
 source ~/.vim/config/look.vim
-source ~/.vim/config/status.vim
-source ~/.vim/config/syntax.vim
+
+source ~/.vim/config/edit/aligment.vim
+source ~/.vim/config/edit/snippets.vim
+source ~/.vim/config/edit/autocomplete.vim
+source ~/.vim/config/edit/copy_paste.vim
+source ~/.vim/config/edit/moving.vim
+source ~/.vim/config/edit/multiple_cursors.vim
 
 source ~/.vim/config/navigation.vim
 source ~/.vim/config/navigation/editor.vim
 source ~/.vim/config/navigation/file.vim
 source ~/.vim/config/navigation/text.vim
 
-source ~/.vim/config/edit/autocomplete.vim
-source ~/.vim/config/edit/snippets.vim
-source ~/.vim/config/edit/multiple_cursors.vim
+source ~/.vim/config/status/numbers.vim
+source ~/.vim/config/status/status.vim
 
 " 888 888 ,e,          888     888 ,e,            d8   888         d8                                 888
 " 888 888  "   e88 888 888 ee  888  "   e88 888  d88   888 ee     d88   Y8b Y8b Y888P  ,e e,   ,"Y88b 888 ee  dP"Y
@@ -104,8 +69,7 @@ source ~/.vim/config/edit/multiple_cursors.vim
 "               ,  88P                   ,  88P
 "              "8",P"                   "8",P"
 
-syntax enable
-filetype plugin indent on
+source ~/.vim/config/status/sign_column.vim
 
 " Always on rainbow parentheses
 au VimEnter * RainbowParenthesesToggle
@@ -114,7 +78,6 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 set encoding=utf-8
-
 
 " 888'Y88                 888
 " 888 ,'Y  ,e e,   ,e e,  888
@@ -191,9 +154,6 @@ let g:DeleteTrailingWhitespace_Action = 'delete'
 " set guioptions-=R
 " set guioptions-=r
 
-" Show numbers
-set number
-
 " Don't wrap long lines
 set nowrap
 
@@ -241,34 +201,6 @@ endfunction
 let g:ctrlsf_ackprg = 'ack'
 map <leader>a :CtrlSF<space>
 
-let g:EasyMotion_leader_key = '<leader>'
-
-" TODO: Open CtrlP in file mode
-
-" vim-signify
-" https://github.com/mhinz/vim-signify
-
-let g:signify_disable_by_default=0
-
-hi SignColumn ctermbg = 7
-
-let g:signify_vcs_list = ['git']
-
-let g:signify_sign_weight = 'NONE'
-
-let g:signify_sign_color_ctermbg = 231
-
-let g:signify_sign_color_ctermfg_add = 70
-let g:signify_sign_color_ctermfg_delete = 160
-let g:signify_sign_color_ctermfg_change = 100
-
-let g:signify_sign_add               = '+'
-let g:signify_sign_delete            = '⎵'
-let g:signify_sign_change            = '⁓'
-let g:signify_sign_change_delete     = '±'
-let g:signify_sign_delete_first_line = '⎴'
-
-
 "" Powerline
 "" https://github.com/Lokaltog/powerline
 
@@ -301,6 +233,7 @@ endif
 let g:session_autosave = 'no'
 
 autocmd BufWrite *.sass silent! :%s/;$//g
+"autocmd BufWrite *.styl silent! :%s/;\|://g
 
 " Restore last editing position
 au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
@@ -317,11 +250,6 @@ map <leader>orc :Econtroller<space>
 map <leader>orm :Emodel<space>
 map <leader>orv :Eview<space>
 
-" Yank text to the OS X clipboard
-map  <leader>p "+p
-map  <leader>y "+y
-nmap <leader>y "+y
-
 " Splits
 map  <c-w>\| :vsp<CR>
 map  <c-w>- :sp<cr>
@@ -329,44 +257,39 @@ map  <c-w>- :sp<cr>
 map <leader>vv :set wrap<cr>
 map <leader>vn :set nowrap<cr>
 
+" https://github.com/drmikehenry/vim-fixkey
+
+"NeoBundle 'drmikehenry/vim-fixkey'
+
 " Resize of splits
-"nmap <leader>k :vertical-resize +5<CR>
-"nmap <c-\> :resize -2<CR>
-"nmap <c-?> :resize +2<CR>
-"nmap <c-8> :vertical-resize -5<CR>
+nmap <M-S-h> :vertical-resize +5<cr>
+nmap <M-S-j> :resize +2<cr>
+nmap <M-S-k> :resize -2<cr>
+nmap <M-S-l> :vertical-resize -5<cr>
 
 noremap  <leader>q :q<cr>
 noremap  <leader>Q :qall<cr>
 
 nnoremap <c-u> viwU<esc>
 
-" Meta configuration
-
-" Source the vimrc file after saving it
-" TODO: Figure out why powerline lose styles
-"if has("autocmd")
-  "autocmd bufwritepost .vimrc source $MYVIMRC
-"endif
-
-" Command line
-
-"
-
-
-"   e88 88e             ,e,          888                   888 ,e,   d8
-"  d888 888b  8888 8888  "   e88'888 888 ee    ,e e,   e88 888  "   d88
-" C8888 8888D 8888 8888 888 d888  '8 888 P    d88 88b d888 888 888 d88888
-"  Y888 888P  Y888 888P 888 Y888   , 888 b    888   , Y888 888 888  888
-"   "88 88"    "88 88"  888  "88,e8' 888 8b    "YeeP"  "88 888 888  888
-"       b
-"       8b,
-
-
 map <leader>evrc :e ~/.vimrc<cr>
 map <leader>etcf :e ~/.tmux.conf<cr>
 map <leader>ezrc :e ~/.zshrc
 "map <leader>epcf :CtrlP ~/.config/powerline<cr>
 
-NeoBundleCheck
+" Edit
 
-" http://patorjk.com/software/taag/#p=display&f=Rozzo
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'vim-scripts/ShowTrailingWhitespace'
+NeoBundle 'vim-scripts/DeleteTrailingWhitespace'
+
+" smartpairs
+" https://github.com/gorkunov/smartpairs.vim
+
+NeoBundle 'gorkunov/smartpairs.vim'
+
+NeoBundle 'dyng/ctrlsf.vim'
+
+set nowritebackup
+NeoBundleCheck

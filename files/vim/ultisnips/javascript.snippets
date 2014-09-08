@@ -5,16 +5,77 @@ var $1 = $0;
 endsnippet
 
 snippet fun "Multiline function"
-function ${1}(${2}) {
+function${1}(${2}) {
   $3
 }
 endsnippet
 
+snippet fun; "Multiline function with ;"
+function${1}(${2}) {
+  $3
+};
+endsnippet
+
+snippet funa "Multiline anonymous function"
+function() {
+  $0
+}
+endsnippet
+
+snippet funaa "Multiline anonymous function with arguments"
+function($1) {
+  $0
+}
+endsnippet
+
+snippet funa, "Multiline anonymous function with comma and the end"
+function() {
+  $0
+},
+endsnippet
+
+snippet funaa, "Multiline anonymous function with arguments and comma and the end"
+function($1) {
+  $0
+},
+endsnippet
+
+snippet funa; "Multiline anonymous function with ;"
+function() {
+  $0
+};
+endsnippet
+
+snippet funaa; "Multiline anonymous function with ;"
+function($1) {
+  $0
+};
+endsnippet
+
 snippet fus "Singleline function"
-function (${1}) { $2 }
+function(${1}) { $2 }
+endsnippet
+
+# Object
+
+snippet {} "Multiline object"
+{
+  $0
+}
+endsnippet
+
+snippet {}, "Multiline object with comma at the end"
+{
+  $0
+},
 endsnippet
 
 # AMD
+
+snippet vrq "var = require(...);"
+var $1 = require('$0');
+endsnippet
+
 
 snippet rq "require(...)"
 require('$0')
@@ -33,4 +94,60 @@ React.createClass({
     return $0
   }
 })
+endsnippet
+
+# Specs
+
+snippet desc "describe"
+describe('$1', function() {
+  $0
+});
+endsnippet
+
+snippet cont "context"
+context('$1', function() {
+  $0
+});
+endsnippet
+
+snippet befe "beforeEach"
+beforeEach(function() {
+  $0
+});
+endsnippet
+
+snippet afte "afterEach"
+afterEach(function() {
+  $0
+});
+endsnippet
+
+snippet it "Dummy it"
+it('$1', function() {
+  $0
+});
+endsnippet
+
+snippet itp "Pending it"
+it('$0');
+endsnippet
+
+snippet exthc "expect(...).to.have.class(...)"
+expect($1).to.have.class('$0');
+endsnippet
+
+snippet extbc "expect(...).to.be.called"
+expect($0).to.be.called;
+endsnippet
+
+snippet extbcw "expect(...).to.be.calledWith(...)"
+expect($1).to.be.calledWith($0);
+endsnippet
+
+snippet extbt "expect(...).to.be.true"
+expect($0).to.be.true;
+endsnippet
+
+snippet extbf "expect(...).to.be.false"
+expect($0).to.be.false;
 endsnippet

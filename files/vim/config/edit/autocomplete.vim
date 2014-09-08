@@ -1,11 +1,14 @@
-" neocomplete
-" https://github.com/Shougo/neocomplete.vim
+" Supertab
+" https://github.com/ervandew/supertab
 
-NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'ervandew/supertab'
 
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_auto_select = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#enable_camel_case = 1
-let g:neocomplete#use_vimproc = 1
-let g:neocomplete#enable_prefetch = 1
+" Auto Pairs
+" http://github.com/jiangmiao/auto-pairs
+
+NeoBundle 'jiangmiao/auto-pairs'
+
+" endwise.vim
+" https://github.com/tpope/vim-endwise
+
+NeoBundle 'tpope/vim-endwise'

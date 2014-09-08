@@ -4,7 +4,6 @@
 " 888  ,d Y888 888P Y888 888P 888 b
 " 888,d88  "88 88"   "88 88"  888 8b
 
-NeoBundle 'mhinz/vim-signify'                " VCS diff using sign column
 "NeoBundle 'bling/vim-bufferline'             " Show recently used buffers
 
 NeoBundle 'mkitt/tabline.vim'
@@ -32,7 +31,7 @@ set cursorline
 "hi CursorColumn ctermbg=7
 hi CursorLine ctermbg=230
 
-autocmd InsertEnter * hi CursorLine ctermbg=226
+autocmd InsertEnter * hi CursorLine ctermbg=7
 autocmd InsertLeave * hi CursorLine ctermbg=230
 
 augroup CursorLine
@@ -51,4 +50,10 @@ let g:indentLine_color_term = 145
 let g:indentLine_char = '⦙'
 let g:indentLine_noConcealCursor = 1
 
+hi CursorLine ctermbg=230
 
+"au FocusLost * hi Normal ctermbg=7
+"au FocusLost * hi CursorLine ctermbg=7
+
+"au FocusGained * hi Normal ctermbg=15
+"au FocusGained * hi CursorLine ctermbg=230

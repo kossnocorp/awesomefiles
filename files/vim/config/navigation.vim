@@ -64,8 +64,11 @@ map <leader>opm :CtrlPModified<cr>
 
 NeoBundle 'Lokaltog/vim-easymotion'
 
+let g:EasyMotion_leader_key = '<leader>'
+
 " Integrate n/N navigation with EasyMotion
 "map  / <Plug>(easymotion-sn)
 "omap / <Plug>(easymotion-tn)
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
+"map  n <Plug>(easymotion-next)
+"map  N <Plug>(easymotion-prev)
+
