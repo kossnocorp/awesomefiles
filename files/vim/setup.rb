@@ -1,3 +1,5 @@
+require 'fileutils'
+
 class Vim
 
   def initialize(options = {})
@@ -5,11 +7,21 @@ class Vim
   end
 
   def setup
+    ensure_source_dirs
+
     symlink_vimrc
     symlink_vim_dir
     symlink_bundle_dir
     symlink_config
     symlink_snippets
+  end
+
+  def ensure_source_dirs
+    [base_dir_path, tmp_dir_expand('bundle')].each do |source_dir|
+      unless Dir.exists?(source_dir)
+        FileUtils::mkdir_p(source_dir) 
+      end
+    end
   end
 
   def symlink_vimrc
