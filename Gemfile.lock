@@ -4,6 +4,7 @@ GEM
     CoffeeTags (0.0.2.6)
     colorize (0.7.3)
     erubis (2.7.0)
+    rake (10.3.2)
 
 PLATFORMS
   ruby
@@ -12,3 +13,4 @@ DEPENDENCIES
   CoffeeTags
   colorize
   erubis
+  rake
